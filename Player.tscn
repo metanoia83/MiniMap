@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Character.gd" type="Script" id=1]
+[ext_resource path="res://Camera_Follow.gd" type="Script" id=2]
+[ext_resource path="res://map_player.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="PrismMesh" id=2]
+size = Vector3( 1, 1, 0.5 )
+
+[sub_resource type="CapsuleShape" id=3]
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="Body" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Direction" type="MeshInstance" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03809, -0.457276 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Target" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06055, 0 )
+
+[node name="Camera" type="Camera" parent="Target"]
+transform = Transform( -1, 6.00819e-09, -3.87584e-07, -3.15588e-08, 0.995299, 0.0968533, 3.86343e-07, 0.0968533, -0.995299, 0, 0, -12.0019 )
+cull_mask = 1
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="MapPlayer" type="Sprite3D" parent="."]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 4, 0 )
+layers = 2
+axis = 1
+texture = ExtResource( 3 )
