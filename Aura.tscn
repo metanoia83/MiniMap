@@ -1,0 +1,132 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://inner_aura.png" type="Texture" id=1]
+[ext_resource path="res://outer_aura.png" type="Texture" id=2]
+[ext_resource path="res://particles.png" type="Texture" id=3]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.803409 ), 0.0, 0.0, 0, 0, Vector2( 0.496774, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.990323, 0.8125 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+scale_random = 0.5
+scale_curve = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+params_cull_mode = 2
+albedo_color = Color( 0.94902, 1, 0.647059, 0.235294 )
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.892045 ), 0.0, 0.0, 0, 0, Vector2( 0.503226, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.882954 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+scale_random = 0.5
+scale_curve = SubResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+params_cull_mode = 2
+albedo_color = Color( 1, 0.921569, 0.415686, 1 )
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=10]
+material = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.710227 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+emission_shape = 2
+emission_box_extents = Vector3( 0.3, 0.3, 0.3 )
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0.2, 0 )
+radial_accel = 1.0
+radial_accel_random = 0.5
+tangential_accel = 1.0
+tangential_accel_random = 0.5
+scale_random = 0.5
+scale_curve = SubResource( 12 )
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.917647, 0.239216, 1 )
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="QuadMesh" id=15]
+material = SubResource( 14 )
+size = Vector2( 0.1, 0.1 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 2
+emission_box_extents = Vector3( 0.3, 0.8, 0.3 )
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 1, 0 )
+scale_random = 0.5
+scale_curve = SubResource( 12 )
+
+[sub_resource type="QuadMesh" id=17]
+material = SubResource( 14 )
+size = Vector2( 0.05, 0.5 )
+
+[node name="Aura" type="Spatial"]
+
+[node name="OuterAura" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+amount = 3
+lifetime = 2.5
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 5 )
+
+[node name="InnerAura" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+amount = 1
+lifetime = 3.0
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 10 )
+
+[node name="DustParticles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245117, 0 )
+amount = 50
+process_material = SubResource( 13 )
+draw_pass_1 = SubResource( 15 )
+
+[node name="DustParticles2" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625732, 0 )
+amount = 50
+process_material = SubResource( 16 )
+draw_pass_1 = SubResource( 17 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.958253, 0.285923, 0, -0.285923, 0.958253, 0, 1.21875, 1.83435 )

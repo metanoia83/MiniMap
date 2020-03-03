@@ -1,7 +1,7 @@
 extends Camera
 
 # class member variables go here, for example:
-export var distance = 6.0
+export var distance = 8.0
 export var height = 2
 var lspeed = 0.05
 
